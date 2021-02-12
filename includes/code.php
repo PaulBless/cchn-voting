@@ -82,8 +82,8 @@ if( isset($_POST['btnprocess'], $_POST['checklist'])){
             
             //second: update application status
             //invoke process method in Applications class
-            $objApplication = new Applications();
-            $process = $objApplication->processApplication($app_id);
+            // $objApplication = new Applications();
+            // $process = $objApplication->processApplication($app_id);
             
             //success message
             echo "<script>alert('Application successfully processed!\\nIt will be evaluated by the Technical Sub-Committee, and Statutory Planning Committee for possible approval.')</script>";
@@ -96,3 +96,30 @@ if( isset($_POST['btnprocess'], $_POST['checklist'])){
     }
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+	$(function(){
+		$(".checkme").click(function(event) {
+			var x = $(this).is(':checked');
+			if (x == true) {
+				$(this).parents(".checkbox-card").find('.passport-box').show();
+				$(this).parents(".checkbox-card").find('.apply-box').hide();
+			}
+			else{
+				$(this).parents(".checkbox-card").find('.passport-box').hide();
+				$(this).parents(".checkbox-card").find('.apply-box').show();
+			}
+		});
+	})
+</script>
+</body>
+</html>

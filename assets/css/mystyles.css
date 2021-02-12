@@ -22,7 +22,7 @@ body {
   	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
   	margin: 100px auto;
 }
-.login .logoimg{
+.login img{
     width: 100px;
     height: 100px;
     margin-left: 150px;

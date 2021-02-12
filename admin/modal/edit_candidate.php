@@ -50,31 +50,31 @@
                       
                         <!-- position -->
                         <div class="form-group">
-						<label class="col-lg-3 control-label">Position</label>
-						<div class="col-lg-6">
-						<select class = "form-control" name = "position">
-								<option ><?php echo $records['position']; ?></option>
-								<option ></option>
-								<option >President</option>
-								<option >Vice President </option>
-								<option >General Secretary</option>
-								<option >Financial Secretary</option>
-								<option >Public Relations</option>
-								<option >General Organizer</option>
-								<option >Cordinating Secretary</option>
-								<option >Secretary for Education</option>
-								<option >Press & Information</option>
-								<option >Computer Prefect</option>
-								<option >Utility/Water Prefect</option>
-							</select>
-						</div>
+							<label class="col-lg-3 control-label">Position</label>
+							<div class="col-lg-6">
+							<select class = "form-control" name = "position">
+									<option ><?php echo $records['position']; ?></option>
+									<option ></option>
+									<option >President</option>
+									<option >Vice President </option>
+									<option >General Secretary</option>
+									<option >Financial Secretary</option>
+									<option >Public Relations</option>
+									<option >General Organizer</option>
+									<option >Cordinating Secretary</option>
+									<option >Secretary for Education</option>
+									<option >Press & Information</option>
+									<option >Computer Prefect</option>
+									<option >Utility/Water Prefect</option>
+								</select>
+							</div>
 						</div>
                         
                         <!-- picture -->
                         <div class="form-group">
-                        <label class="col-lg-3 control-label">Picture</label>
-                        <div class="col-lg-6">
-						<input type="file" name="image" required> 
+							<label class="col-lg-3 control-label">Picture</label>
+							<div class="col-lg-6">
+							<input type="file" name="image" required> 
 							</div>
                         </div>
                         

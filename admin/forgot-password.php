@@ -125,7 +125,7 @@ $log_usermail = $_POST['email'];
 <!--            <div class="register-link font-weight-normal ">Don't have an account? <a class="new-register font-weight-semibold f-reg" href="register.php">Register</a></div>-->
 <!--
         <div class="bottom-textt ">
-            <p class="lower-text">Designed by <a class="developer" href="">Paul Eshun</a></p>
+            <p class="lower-text">Designed by <a class="developer" href="https://linkedin.com/in/paul-eshun">Paul Eshun</a></p>
         </div>
 -->
         </form>

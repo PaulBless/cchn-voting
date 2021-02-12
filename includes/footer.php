@@ -6,7 +6,7 @@
 
 <!-- FOOTER -->
     <div id="footer">
-        <p>&copy; E-Voting 2021. &nbsp;Developed by <a class="app-developer" href="">Paul Eshun </a>&nbsp;</p>
+        <p>&copy; E-Voting 2021. &nbsp;Developed by <a class="app-developer" href="https://linkedin.com/in/paul-eshun">Paul Eshun </a>&nbsp;</p>
     </div>
     <!--END FOOTER -->
 

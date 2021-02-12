@@ -24,7 +24,7 @@ LOGIN PAGE
     font-size: 15px;
     text-transform: uppercase;
     color: #3a6248;
-    border-bottom: 1px solid #dee0e4;
+    /* border-bottom: 1px solid #dee0e4; */
     padding-top: 5px;
     margin-bottom: 10px;
 }
@@ -50,20 +50,7 @@ LOGIN PAGE
     border: 5px solid #3a6248;
 }
 
-.form-group::before{
-/*
-    font-family: 'Font Awesome\ 5 Free';
-    content: "\f007";
-    position: absolute;
-    font-size: 20px;
-    right: 525px;
-    padding-top: 4px;
-    color: #666;
-*/
-}
-.form-group:last-of-type::before{
-/*    content: "\f044";*/
-}
+
 
 .form-control 
 {

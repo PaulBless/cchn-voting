@@ -9,7 +9,8 @@
                       </div>
                       <div class="modal-body">
                           <form id="defaultForm" method="post" class="form-horizontal px-4 py-3" action="register-candidate.php" enctype = "multipart/form-data">
-                        <div class="form-group">
+                            <div class="msg"></div>
+                          <div class="form-group">
                             <label class="col-lg-3 control-label">Firstname</label>
                             <div class="col-lg-6">
                                 <input type="text" class="form-control" name="firstName" placeholder="Enter firstname" id="first-name" value="" />

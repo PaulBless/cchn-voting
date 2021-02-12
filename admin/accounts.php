@@ -235,12 +235,9 @@ if (isset($_GET['reviewId'])) {
    <?php include('modal/add_user.php') ?>
     
 <!-- FOOTER -->
-    <div id="footer" class="">
-        <p>&copy; E-Voting 2021. &nbsp;Developed by <a class="app-developer" href="">Paul Eshun </a>&nbsp;</p>
-    </div>
-    <!--END FOOTER -->
+    <?php include('../includes/footer.php'); ?>
+<!--END FOOTER -->
     
-    <?php //include ('../includes/footer.php'); ?>
 
 <!-- validation scripts-->
 <script type="text/javascript">

@@ -132,7 +132,7 @@ $dbresults = $candidates->getAllCandidates();
                         <h5><span class="fa fa-home"></span> E-Voting <i class="fa fa-chevron-right"></i> Candidates <i class="fa fa-chevron-right"></i> Candidate List </h5>
                     </div>
                 </div>
-                  <hr />
+                  <hr class="border-primary"/>
                    
                  <div class="col-lg-12">
                    <a href="dashboard.php" class="btn btn-warning btn-sm" style="font-weight: bold"><i class="fa fa-arrow-left" style="margin-right: 3px;"></i> Go Back</a>
@@ -233,12 +233,9 @@ $dbresults = $candidates->getAllCandidates();
    <?php include('modal/add_candidate.php') ?>
     
 <!-- FOOTER -->
-    <div id="footer" class="">
-        <p>&copy; E-Voting 2021. &nbsp;Developed by <a class="app-developer" href="">Paul Eshun </a>&nbsp;</p>
-    </div>
-    <!--END FOOTER -->
+<?php include('../includes/footer.php'); ?>
+<!--END FOOTER -->
     
-    <?php //include ('../includes/footer.php'); ?>
 
 <!-- validation scripts-->
 <script type="text/javascript">

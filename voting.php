@@ -62,13 +62,16 @@ while ($each_position = mysqli_fetch_array($get_positions)) {
             background:  #f8f9fa;
             cursor: all pointer;
         }
-        #nav a{
-        /* color: #252525 !important; */
-        }
+        
+        
         #nav a:hover, #nav:visited{
         text-decoration: none;
         }
 
+
+        #list{
+        padding:  10px auto 25px;
+      }
     </style>
 </head> 
 
@@ -126,16 +129,27 @@ while ($each_position = mysqli_fetch_array($get_positions)) {
                         <!-- <h5>E-Voting: Candidate List </h5> -->
                     </div>
                 </div>
-                  <hr />
+                  <!-- <hr /> -->
                    
 
 <?php
 
 for ($i=0; $i < count($positions_array); $i++) { 
     $current_position = $positions_array[$i];
-    echo $current_position;
+    // echo $current_position;
 
 ?>
+    
+    <!-- implement new ballot paper section --> 
+    <div class="login-container d-flex align-items-center justify-content-center hidden">
+        <form class="login-form text-center" action="" method="post" role="form" id="defaultForm">
+        <div class="form-group">
+            <input type="tel" class="form-control rounded-pill form-control-md" placeholder="Phone Number" attern="[0][0-9]{9}" maxlength="10" name="phone_number" id="user_number" required>
+        </div>    
+    </form>
+    </div>
+
+
 <div class="col-lg-12">
 
                  <div class="box">
@@ -148,6 +162,7 @@ for ($i=0; $i < count($positions_array); $i++) {
                  </div>
 
                  <div class="panel-body">
+                 
                      <?php 
                      $sql = "SELECT * FROM `candidates` WHERE `position`='$current_position'";
                      $query = mysqli_query($connect_db, $sql);
@@ -157,8 +172,8 @@ for ($i=0; $i < count($positions_array); $i++) {
                         <div id = "position" style="padding: 10px 10px; ">
                         <div class="col-lg-5 ">
                      <div class="card" style="max-width: 500px;">
-                    <div class="row no-gutters">
-                        <div class="col-sm-5" style="background: #868e96;" id="picture">
+                    <div class="row no-gutters">    
+                    <div class="col-sm-5" style="background: #868e96;" id="picture">
                             <img src="admin/<?php echo $results['picture'] ?>" class="card-img-top h-100" alt="...">
                         </div>
                         <div class="col-sm-7">
@@ -189,18 +204,40 @@ for ($i=0; $i < count($positions_array); $i++) {
 
 
 
-            
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var current_candidate_position = <?php echo $current_position; ?>
+            if(current_candidate_position !== "President")
+            {
+                $('.col-lg-5').hide();
+            }else{
+                $('.col-lg-5').show();
+            }
+        });
+    </script>
 
-    <!-- <script src="./assets/js/jquery-3.4.1.min.js"> </script>  -->
+    <script>
+        $(document).unload(function(){
+            var current_candidate_position = <?php echo $current_position; ?>
+            if(current_candidate_position !== "President")
+            {
+                $('.col-lg-5').hide();
+            }else{
+                $('.col-lg-5').show();
+            }
+        });
+    </script>
 
-    <script src="./admin/assets/js/jquery-2.0.3.min.js"></script>
+    <script src="./assets/js/jquery-3.4.1.min.js"> </script> 
+
+    <!-- <script src="./admin/assets/js/jquery-2.0.3.min.js"></script> -->
 	<script src="./assets/js/bootstrap.bundle.min.js"> </script> 
 
     <!-- PAGE LEVEL SCRIPTS -->
-    <script src="./admin/assets/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <script src="./admin/assets/plugins/jquery-steps-master/lib/jquery.cookie-1.3.1.js"></script>
-    <script src=".admin/assets/plugins/jquery-steps-master/build/jquery.steps.js"></script>   
-    <script src="./admin/assets/js/WizardInit.js"></script>
+    <!-- <script src="./admin/assets/js/modernizr-2.6.2-respond-1.1.0.min.js"></script> -->
+    <!-- <script src="./admin/assets/plugins/jquery-steps-master/lib/jquery.cookie-1.3.1.js"></script> -->
+    <!-- <script src=".admin/assets/plugins/jquery-steps-master/build/jquery.steps.js"></script>    -->
+    <!-- <script src="./admin/assets/js/WizardInit.js"></script> -->
 
     <script type="text/javascript">
      //Near checkboxes

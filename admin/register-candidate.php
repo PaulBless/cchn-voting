@@ -36,7 +36,7 @@ if(isset($_POST['btnSave'])){
                     
     //check if the details exists in the database
    //preparing the SQL statement will prevent SQL injection.
-    if ($stmt = $connect_db->prepare('SELECT `position` FROM `candidates` WHERE name = ?')) {
+    if ($stmt = $connect_db->prepare('SELECT `position` FROM `candidates` WHERE `name` = ?')) {
         // Bind parameters (s = string, i = int, b = blob, etc), 
         //in our case the username is a string so we use "s"
         $stmt->bind_param('s', $name);
@@ -44,7 +44,7 @@ if(isset($_POST['btnSave'])){
         $stmt->store_result(); 	//store the result, and check it availability.
         if ($stmt->num_rows > 0) {
         $stmt->bind_result($pose_vying);
-        $stmt->fetch(); 	//record exists, fetch results 
+        $stmt->fetch(); 	//record exists, fetch candidate 
             $error = "Record Exists..\\nThis candidate had been added already for the position of $pose_vying.!";
             echo "<script>alert('".$error."'); document.location.href='candidates.php'</script>";
         }else{
@@ -59,7 +59,7 @@ if(isset($_POST['btnSave'])){
         );
     header ('location: candidates.php');
     } else{
-        $message = "Candidate $name successfully added.";
+        $message = "New Candidate successfully added with the name: $name";
         echo "<script>alert('".$message."'); document.location.href='candidates.php'</script>";;
             } 
         }

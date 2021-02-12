@@ -5,56 +5,55 @@ session_start();
 error_reporting(0);
 
 //get voter phone number from session
-if(isset($_SESSION['voter_phone']))
-$voters_phone = $_SESSION['voter_phone'];
+if(isset($_SESSION['voter_phone_number']))
+  $voters_phone = $_SESSION['voter_phone_number'];
 
 //ensure db is added before processing script
 require_once('./functions/db_connection.php');
 
 // Now we check if the data from the login form was submitted, isset() will check if the data exists.
 if (isset($_POST['btnVerify'])) {   
-    //pass form username and password
+    //get input data
     $code1 = $_POST['code1'];
     $code2 = $_POST['code2'];
     $code3 = $_POST['code3'];
     $code4 = $_POST['code4'];
-    $otp_code = $code1 .$code2 .$code3 .$code4;
+    $otp_code = $code1 .$code2 .$code3 .$code4; //set input code
 
    
-    // preparing the SQL statement to prevent SQL injection.
-    if ($stmt = $connect_db->prepare('SELECT otp, mobileno, code_state FROM `codes` WHERE otp = ?')) {
-	// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
+  // preparing the SQL statement to prevent SQL injection.
+  if ($stmt = $connect_db->prepare('SELECT otp, mobileno, code_state FROM `codes` WHERE otp = ?')) {
+	// Bind parameters (s = string, i = int, b = blob, etc), in our case the otp is a string so we use "s"
 	$stmt->bind_param('s', $otp_code);
 	$stmt->execute();  //execute the query
 	$stmt->store_result(); // Store the result to check later
 
-  if ($stmt->num_rows > 0) {
-	$stmt->bind_result($verify_otp, $voter_number, $code_status);
-	$stmt->fetch();
-    
-  // check code status if used
-  if($code_status == 1)
-  {
-    echo "<script>alert('Sorry, this OTP Code is already used!'); document.location.href='./verifyotp.php'</script>"; 
-  }else{
+    if ($stmt->num_rows > 0) {
+    $stmt->bind_result($verify_otp, $voter_number, $code_status);
+    $stmt->fetch();
+      
+      // check if code status is already used or validated
+      if($code_status == 1)
+      {
+        echo "<script>alert('Sorry, this OTP Code is already used..\\nCannot proceed to vote!'); document.location.href='./verification.php'</script>"; 
+      }else{
+      //otp code valid, not used
+      //update otp code status
+      $update_otp_state = mysqli_query($connect_db, "UPDATE `codes` SET code_state='1' WHERE otp = $otp_code");
 
-    //otp code valid, not used
-    //update otp code status
-    $update_otp = mysqli_query($connect_db, "UPDATE `codes` SET code_state='1' WHERE otp = $otp_code");
+      // echo "<script>alert('Welcome $voter_number, to CCHN Voting System'); document.location.href='voting.php'</script>";
+      header('location: voting.php');
+        }
+    } else {
+      echo "<script>alert('Ooops..\\nOTP verification code invalid..'); document.location.href='./verification.php'</script>"; 
+         } 
 
-    // echo "<script>alert('Welcome $voter_number, to CCHN Voting System'); document.location.href='voting.php'</script>";
-       header('location: voting.php');
+	  $stmt->close();    //close sql
+    $connect_db->rollback(); //rollback db connection
     }
-	}
-    else {
-        ## display alert popup
-        echo "<script>alert('Error\\nVerification code invalid..')</script>"; 
-    } 
 
-	$stmt->close();    //close sql
-    
-    }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -103,8 +102,8 @@ if (isset($_POST['btnVerify'])) {
       }
 
         input:focus {
-          border-color: purple;
-          box-shadow: 0 0 5px purple inset;
+          border-color: #3a6248;
+          box-shadow: 0 0 5px #3a6248 inset;
         }
         .sms-not-sent{
             margin: 15px 0;
@@ -122,39 +121,42 @@ if (isset($_POST['btnVerify'])) {
        <!--login container-->
     <div class="login-container d-flex align-items-center justify-content-center">
         <form class="login-form text-center" action="" method="post" role="form">
-        <div class="logo"><img src="./assets/images/logo.png" width="110" height="110"/><span style="display: block"><h4 class="app-title">cchn voting system </h4></span>
+        <div class="logo"><img src="./assets/images/logo.png" width="110" height="110"/><span style="display: block"><h4 class="app-title text-bold py-1">cchn voting system - verify pin </h4></span>
          </div> 
         <div class="form-group">
-         	Please enter the verification code we sent you on : <b> <?php echo $_SESSION['voter_phone']; ?> </b>
+         	Please enter the verification code we sent you on : <b> <?php echo $_SESSION['voter_phone_number']; ?> </b> to proceed voting...
         </div>
          <div class="form-group">
             <!-- <input type="tel" class="form-control rounded-pill form-control-lg" placeholder="Phone Number" name="phone_number" id="user_number" required> -->
             <div id="form">
-                <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" name="code1"/>
-                <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" name="code2"/>
-                <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" name="code3"/>
-                <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" name="code4"/>
+              <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" name="code1"/>
+              <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" name="code2"/>
+              <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" name="code3"/>
+              <input type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" name="code4"/>
             </div>
         </div>
         
         <div class="login-link">
-        <button class="btn btn-custom mt-3 btn-block font-weight-bold rounded-pill btn-login" name="btnVerify">Verify PIN</button>
+        <button class="btn btn-custom mt-3 btn-block font-weight-bold rounded-pill btn-login" name="btnVerify">VERIFY PIN</button>
         </div>
 
         <div class="sms-not-sent">
             Didn't receive the code?<br />
-            <a href="#">Re-send code</a><br />
+          <a href="./functions/resend-otp.php" id="resend">Re-send code</a><br />
         </div>
 
         <div class="bottom-text">
-            <p class="lower-text">Designed by <a class="developer" href="">Paul Eshun</a></p>
+            <p class="lower-text">Designed by <a class="developer" href="https://linkedin.com/in/paul-eshun">Paul Eshun</a></p>
         </div>
     
         </form>
     </div>
     
     <!-- auto move to next input box -->
+
+
 <script type="text/javascript">
+    // auto move input character function
     $(function() {
     'use strict';
 
@@ -204,22 +206,23 @@ if (isset($_POST['btnVerify'])) {
 </script>
 
 <script type="text/javascript">
-        $(document).ready(function() {
-            $(".btn-login").click(function() {
-            // $(this).prop("disabled", true);
-            $(this).html(
-                `<span style="display: inline-block;
-    width: 2rem;
-    height: 2rem;
-    vertical-align: text-bottom;
-    border: .25em solid currentColor;
-    border-right-color: transparent;
-    border-radius: 50%;
-    -webkit-animation: spinner-border .75s linear infinite;
-    animation: spinner-border .75s linear infinite;width: 1rem;
-    height: 1rem;
-    border-width: .2em;
-    " class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> verifying...`            );
+      $(document).ready(function() {
+        //function to show spinner on button clicked
+        $(".btn-login").click(function() {
+          // $(this).prop("disabled", true);
+          $(this).html(
+           `<span style="display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            vertical-align: text-bottom;
+            border: .25em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            -webkit-animation: spinner-border .75s linear infinite;
+            animation: spinner-border .75s linear infinite;width: 1rem;
+            height: 1rem;
+            border-width: .2em;
+            " class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> a moment please...`            );
             });
         });
     </script>

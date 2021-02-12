@@ -84,9 +84,9 @@ require_once('./vendor/autoload.php');
     <script src="./assets/js/popper.min.js"></script>
     <script src=".assets/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(function(){
-          $("#user_number").focus(); 
-       });    
+    //     $(function(){
+    //       $("#user_number").focus(); 
+    //    });    
     </script>
 </head>
        
@@ -94,20 +94,20 @@ require_once('./vendor/autoload.php');
        <!--login container-->
     <div class="login-container d-flex align-items-center justify-content-center">
         <form class="login-form text-center" action="./functions/sendOTP.php" method="post" role="form" id="defaultForm">
-        <div class="logo"><img src="./assets/images/logo.png" width="110" height="110"/><span style="display: block"><h4 class="app-title">cchn Voting System </h4></span>
-         </div> 
-        <div class="form-group">
-         	Please enter your registered mobile phone number below, and we will send you a login code.
-        </div>
-         <div class="form-group">
-            <input type="tel" class="form-control rounded-pill form-control-lg" placeholder="Phone Number" attern="[0][0-9]{9}" maxlength="10" name="phone_number" id="user_number" required>
-        </div>
-        <div class="login-link">
-        <button class="btn btn-custom mt-3 btn-block font-weight-bold rounded-pill btn-login" name="sendotp">Get Code </button>
-        </div>
-        <div class="bottom-text">
-            <p class="lower-text">Designed by <a class="developer" href="">Paul Eshun</a></p>
-        </div>
+            <div class="logo "><img src="./assets/images/logo.png" width="110" height="110"/><span style="display: block"><h4 class="app-title text-bold py-1">cchn voting system - login </h4></span>
+            </div> 
+            <div class="form-group mb-2 text-black">
+                To sign in, enter your registered mobile number and we will send you a login pin to continue.. 
+            </div>
+            <div class="form-group">
+                <input type="tel" class="form-control text-success font-weight-bold rounded-pill form-control-lg mb-3" placeholder="Phone Number" pattern="[0][0-9]{9}" maxlength="10" name="phone_number" id="user_number" autofocus required>
+            </div>
+            <div class="login-link">
+                <button class="btn btn-custom mt-3 btn-block font-weight-bold rounded-pill btn-login" name="sendotp">GET LOGIN PIN </button>
+            </div>
+            <div class="bottom-text">
+                <p class="lower-text">Designed by <a class="developer" href="https://linkedin.com/in/paul-eshun">Paul Eshun</a></p>
+            </div>
     
         </form>
     </div>

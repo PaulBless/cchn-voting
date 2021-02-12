@@ -120,7 +120,7 @@ if($result2->num_rows > 0){
 
                    <!--system users-->
                     <div class="col-lg-4 col-sm-6 col-xs-12 main-widget">
-                        <div class="main-box infographic-box ">
+                        <div class="main-box infographic-box " style="background-color: #2f3947;">
                             <i class="fa fa-user-md red-bg"></i>
                             <span class="headline"><strong>System Users</strong></span>
                             <span class="value"><?php echo $total_users; ?></span>
@@ -128,8 +128,8 @@ if($result2->num_rows > 0){
                         </div>
                     </div>
                     <!--total applications received-->
-                    <div class="col-lg-4 col-sm-6 col-xs-12 main-widget">
-                        <div class="main-box infographic-box ">
+                    <div class="col-lg-4 col-sm-6 col-xs-12 main-widget bg-danger">
+                        <div class="main-box infographic-box " style="background-color: #2f3947;">
                             <i class="fa fa-users emerald-bg"></i>
                             <span class="headline"><strong>Total Candidates</strong></span>
                             <span class="value"><?php echo $total_candidates ?></span>
@@ -138,7 +138,7 @@ if($result2->num_rows > 0){
                     </div>
                     <!--permits granted -->
                     <div class="col-lg-4 col-sm-6 col-xs-12 main-widget">
-                        <div class="main-box infographic-box ">
+                        <div class="main-box infographic-box " style="background-color: #2f3947;">
                             <i class="fa fa-list-ul green-bg"></i>
                             <span class="headline"><strong>Total Voters</strong></span>
                             <span class="value"><?php echo $total_voters ?></span>

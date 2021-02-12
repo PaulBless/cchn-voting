@@ -132,7 +132,7 @@ if (isset($_POST['btnLogin'])) {
         <button class="btn btn-custom mt-3 btn-block font-weight-bold rounded-pill btn-login" name="btnLogin">Login</button>
         </div>
         <div class="bottom-text">
-            <p class="lower-text">Designed by <a class="developer" href="">Paul Eshun</a></p>
+            <p class="lower-text">Designed by <a class="developer" href="https://linkedin.com/in/paul-eshun">Paul Eshun</a></p>
         </div>
     
         </form>

@@ -9,9 +9,6 @@ $userID = "";
 if(isset($_SESSION['id']))
 	$userID = $_SESSION['id'];
 
-## proceed to update table
-##capture logout date and time
-// $logout_sql = mysqli_query($connect_db, "UPDATE userlog AS s LEFT JOIN( SELECT * FROM userlog ) AS l ON l.id = s.id SET s.logout = NOW() WHERE s.userId='$userID'");
 ?>
 
 
@@ -71,8 +68,7 @@ if(isset($_SESSION['id']))
     
     <body>
         <div class="logout text-center"> 
-        <div class="loader"><span class="hint">Loging out soon...</span></div>
-<!--        <div class="text-hint">Loging out, please wait...</div>-->
+        <div class="loader"><span class="hint">Loging out, please wait...</span></div>
     </div>
     </body>
 </html>

@@ -75,113 +75,7 @@ while ($each_position = mysqli_fetch_array($get_positions)) {
       border-bottom: 2px solid #f1f1f1;
     }
   
-    #list{
-    padding:  10px auto 25px;
-    }
-    .candidates img{
-       border-radius: 10%;
-     }
-    .cand-img{
-      margin: 10px auto;
-      display: inline;
-      float: left;
-      width: 100%;
-      background: #f8f8f8;
-      transition: 0.5s;
-      text-align: center;
-      border: 1px solid #ccc;
-    }
-    .cand-img:hover{
-      box-shadow: 0 2px 20px #333;
-      border-top: 4px solid cadetblue;
-      filter: grayscale(1);
-          
-    }
-    .caption{
-      font-family: 'Arial';
-      font-size: 12px;
-      letter-spacing: 2px;
-      margin: 20px 0 10px 0;
-    }
-    .caption::after
-    {
-        content: '';
-        background: #1f7099;
-        display: block;
-        height: 1px;
-        width: 80px;
-        margin: 5px auto 5px;
-      }
-
-    .cand-tag
-    {
-        font-size: 12px;
-        font-weight: bold;
-        margin: 10px 0 10px 0;
-    }
-    .cand-tag span{
-        font-size: 20px;
-        font-weight: 500;
-    }
-    .cand-picture{
-        display: inline;
-        /* float: left; */
-        padding-top: 20px;
-        padding-bottom: 20px;
-        margin-bottom: 10px;
-    }
-    .cand-content
-    {
-        font-size: 15px;
-        color: #252525;
-    }
-    .cand-content strong
-    {
-        display: block;
-    }
-    .link-box a:hover{
-      text-decoration: none;
-    }
-    .cast-vote-btn{
-      position: relative;
-      display: inline-block;
-      text-transform: capitalize;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      overflow: hidden;
-      transition:all 0.3s ease;
-      -moz-transition:all 0.3s ease;
-      -webkit-transition:all 0.3s ease;
-      -ms-transition:all 0.3s ease;
-      -o-transition:all 0.3s ease;
-    }
-
-    .cast-vote-btn .btn-title{
-      position: relative;
-      display:block;
-      font-size: 16px;
-      color: #ffffff;
-      font-weight: 700;
-      padding: 10px 20px;
-      background: cadetblue;
-      border-radius: 8px;
-      z-index:1;
-      transition:all 0.3s ease;
-      -moz-transition:all 0.3s ease;
-      -webkit-transition:all 0.3s ease;
-      -ms-transition:all 0.3s ease;
-      -o-transition:all 0.3s ease;
-    }
-
-    .cast-vote-btn:hover .btn-title{
-      background: #252525;
-      color: #ffffff;
-    }
-
-    .positions{
-      padding-top: 20px;
-    }
+   
   </style>
 
 </head> 
@@ -241,10 +135,10 @@ while ($each_position = mysqli_fetch_array($get_positions)) {
       </button>
       <div class="collapse navbar-collapse align-items-center justify-content-center" id="collapsibleNavId">
         <ul class="navbar-nav justify-content-center mt-2 mt-lg-0">
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="home.php">Core Members</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="auxiliary.php">Auxiliary Members</a>
           </li>
         </ul>
@@ -254,24 +148,53 @@ while ($each_position = mysqli_fetch_array($get_positions)) {
 </header>  
 <!-- end header -->
 
-    
-	<div class="content">
-		<div class="row">
-			<div class="col-lg-12">
-				<h3 class="title mb-3 mt-4 text-center"> This is the Auxiliary Page</h3>
-			</div>
-		</div>
-	</div>
- 
+  <?php
 
-<footer class="main-footer justify-content-between hidden" style="background: #252525; margin-top: 40px; color: #979797; height: 50px; font-size: 13px">
-    <div class="container mt-4 mb-4 py-3">
-      <div class="pull-right hidden-xs" style="float: right; margin-top: 5x">
+  for ($i=0; $i < count($positions_array); $i++) { 
+      $current_position = $positions_array[$i];
+      // echo $current_position;
+      ?> 
+      <div class="d-lg-flex align-content-center justify-content-center text-light font-weight-bold mt-4 py-2 bg-dark "> <center>Position: <?php echo $current_position; ?> <span class="ml-4 text-secondary ">Select only one Candidate</span> </center>  </div>
+      <?php
+
+  ?>
+                    
+            <?php 
+                     $sql = "SELECT * FROM `candidates` WHERE `position`='$current_position'";
+                     $query = mysqli_query($connect_db, $sql);
+                     while($results = mysqli_fetch_array($query))
+                     {
+                        ?>
+                       
+                        <div class="bg-white container d-flex align-items-center justify-content-center">
+                            <!-- <p class="text-warning">Please, choose your favourite candidate</p> -->
+                            <form action="" id="ballot" class="ballot ">
+                                <div class="form-group ">
+                                   <input type="radio" name="person[]" id="candidate_selected" class="mb-2 py-2 mr-4" value="<?php echo $results['candidateid'] ?>">
+                                    <img src="admin/<?php echo $results['picture'] ?>" class="image-responsive mb-2 py-1 m-2" alt="Picture" height="120" width="120" style="border-radius: 50%;">
+                                    <label for="name" class="text-black text-uppercase mb-2 py-2 mr-4 font-weight-bold"><?php echo $results['name'] ?></label>
+                                </div>
+
+                                <!-- submit vote button --> 
+                            </form>                           
+
+                    </div>
+                        <?php
+                     }
+            ?>                
+
+
+<?php } ?>
+
+<!-- 
+<footer class="main-footer justify-content-between " style="background: #252525; margin-top: 40px; color: #fff; height: 50px; font-size: 13px">
+    <div class="container">
+      <div class="pull-right hidden-xs" style="float: right; margin-top: 5px">
         <b>Designed by Paul Eshun</b>
       </div>
-      <strong class="pull-left " style="margin-top: 5px;">CCHN - Copyright &copy; 2021 </strong>
+      <strong>CCHN - Copyright &copy; 2021 </strong>
     </div>
-</footer>
+</footer> -->
 
 
     <script src="./assets/js/jquery-3.4.1.min.js"> </script> 
@@ -281,9 +204,9 @@ while ($each_position = mysqli_fetch_array($get_positions)) {
 
     <!-- PAGE LEVEL SCRIPTS -->
     <!-- <script src="./admin/assets/js/modernizr-2.6.2-respond-1.1.0.min.js"></script> -->
-    <script src="./admin/assets/plugins/jquery-steps-master/lib/jquery.cookie-1.3.1.js"></script>
-    <script src=".admin/assets/plugins/jquery-steps-master/build/jquery.steps.js"></script>   
-    <script src="./admin/assets/js/WizardInit.js"></script>
+    <!-- <script src="./admin/assets/plugins/jquery-steps-master/lib/jquery.cookie-1.3.1.js"></script> -->
+    <!-- <script src=".admin/assets/plugins/jquery-steps-master/build/jquery.steps.js"></script>    -->
+    <!-- <script src="./admin/assets/js/WizardInit.js"></script> -->
 
     <script type="text/javascript">
      //Near checkboxes
@@ -294,11 +217,8 @@ while ($each_position = mysqli_fetch_array($get_positions)) {
   
   <script type="text/javascript">
       $(document).ready(function(){
-        //trigger button clicked
-        $('#castVote').click(function(e){
-          alert ("button clicked");
-          $('#vote_detail').html().hide();
-        });
+        
+        
 
       });
     </script>

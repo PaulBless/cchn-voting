@@ -12,12 +12,12 @@ require_once '../functions/db_connection.php';
 ## proceed to execute on clicking login button
 if(isset($_POST['btnLogin'])){
 
-//post variables
-$log_username = $_POST['username'];
-$log_userpass = $_POST['password'];
+    //post variables
+    $log_username = $_POST['username'];
+    $log_userpass = $_POST['password'];
 
 	//preparing the SQL statement will prevent SQL injection.
-    if ($stmt = $connect_db->prepare('SELECT adminid, fullname, password FROM `admin_account` WHERE username = ?')) {
+    if ($stmt = $connect_db->prepare('SELECT `adminid`, `fullname`, `password` FROM `admin_account` WHERE `username` = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), 
     //in our case the username is a string so we use "s"
 	$stmt->bind_param('s', $log_username);
@@ -128,29 +128,29 @@ $log_userpass = $_POST['password'];
         <div class="login-container d-flex align-items-center justify-content-center">
        <!-- begin login form--> 
         <form class="login-form text-center" action="" method="post" role="form">
-        <div class="logo"><img src="../assets/images/logo.png" width="100" height="100"/><span style="display: block"><h4 class="app-title">CCHN Voting System</h4></span>
-        <span class="hint"><h6>Admin Login Portal</h6></span>  
-        <!-- display error message -->
-        <p class="text-danger text-bold"><?php echo $_SESSION['msg'];?>
-        <?php echo $_SESSION['msg']="";?><?php echo $_SESSION['msg']="";?></p>
-         </div> 
-        <div class="form-group">
-         <input type="text" class="form-control rounded-pill form-control-lg" placeholder="Username" name="username" value="<?php if(isset($_COOKIE["user_login"])) { echo $_COOKIE["user_login"]; } ?>" id="user_id" required autofocus>
-        </div>
-         <div class="form-group">
-            <input type="password" class="form-control rounded-pill form-control-lg" placeholder="Password" name="password" value="<?php if(isset($_COOKIE["userpassword"])) { echo $_COOKIE["userpassword"]; } ?>"id="user_pass" required>
-        </div>
-        <div class="forgot-link d-flex align-items-center justify-content-between">
-            <div class="form-check">
-                <input type="checkbox" name="rememberme" id="remember" <?php if(isset($_COOKIE["user_login"])) { ?> checked <?php } ?> class="form-check-input">
-                <label for="remember">Remember me</label>
+            <div class="logo"><img src="../assets/images/logo.png" width="100" height="100"/><span style="display: block"><h4 class="app-title text-bold py-1">CCHN Voting System - admin login</h4></span>
+            <!-- <span class="hint"><h6>Admin Login Portal</h6></span>   -->
+            <!-- display error message -->
+            <p class="text-danger text-bold"><?php echo $_SESSION['msg'];?>
+            <?php echo $_SESSION['msg']="";?><?php echo $_SESSION['msg']="";?></p>
+            </div> 
+            <div class="form-group"> 
+                <input type="text" class="form-control font-weight-medium rounded-pill form-control-lg" placeholder="Username" name="username" value="<?php if(isset($_COOKIE["user_login"])) { echo $_COOKIE["user_login"]; } ?>" id="user_id" required autofocus>
             </div>
-           <!--forgot password link-->
-            <a class="forgot-pwd font-weight-semibold f-pwd" href="forgot-password.php" >Forgot Password?</a>    
-        </div>
-        <div class="login-link">
-        <button id="submit-btn" class="btn btn-custom mt-3 btn-block font-weight-bold rounded-pill btn-login" name="btnLogin" onclick="">Login</button>
-        </div>
+            <div class="form-group">
+                <input type="password" class="form-control font-weight-medium rounded-pill form-control-lg" placeholder="Password" name="password" value="<?php if(isset($_COOKIE["userpassword"])) { echo $_COOKIE["userpassword"]; } ?>"id="user_pass" required>
+            </div>
+            <div class="forgot-link d-flex align-items-center justify-content-between">
+                <div class="form-check">
+                    <input type="checkbox" name="rememberme" id="remember" <?php if(isset($_COOKIE["user_login"])) { ?> checked <?php } ?> class="form-check-input">
+                    <label for="remember" class="text-black">Remember me</label>
+                </div>
+            <!--forgot password link-->
+                <a class="forgot-pwd font-weight-semibold text-black f-pwd" href="forgot-password.php" >Forgot Password?</a>    
+            </div>
+            <div class="login-link">
+                <button id="submit-btn" class="btn btn-custom mt-3 btn-block font-weight-bold rounded-pill btn-login" name="btnLogin" onclick="">Login</button>
+            </div>
          <!--register link-->
             <div class="register-link font-weight-normal ">Designed by <a class="new-register font-weight-semibold f-reg" href="../jecmasgh/index.html" target="blank">Paul Eshun</a></div>
            <!-- <div class="register-link font-weight-normal ">Don't have an admin account?  <a class="new-register font-weight-semibold f-reg" href="register.php" data-target="" data-toggle="">Register</a></div> -->
@@ -159,7 +159,7 @@ $log_userpass = $_POST['password'];
     </div>
     
   
-<!-- scripts-->
+    <!-- scripts-->
     <script src="./assets/js/jquery.min.js"></script>
     <script src="./assets/js/popper.min.js"></script>
     <script src=".assets/js/bootstrap.min.js"></script>
