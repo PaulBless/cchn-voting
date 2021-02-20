@@ -154,62 +154,32 @@ while ($each_position = mysqli_fetch_array($get_positions)) {
 <div id="smartwizard" height="600px">
 
     <ul class="nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#step-1">
-            Step 1
+
+    <?php    
+    
+    for ($i=0; $i < count($positions_array); $i++) { $position = $positions_array[$i];  ?>
+      <li class="nav-item">
+          <a class="nav-link" href="#step-<?php echo $i; ?>">
+            <?php echo $position ?>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#step-2">
-            Step 2
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#step-3">
-            Step 3
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#step-4">
-            Step 4
-          </a>
-        </li>
+    <?php }
+    ?>
     </ul>
 
     <div class="tab-content">
-        <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
-            Lorem ipsum dolor sit amet, consectet
-        </div>
-        <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
-            Lorem ipsum dolor sit amet, consectet
-        </div>
-        <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
-            Lorem ipsum dolor sit amet, consectet
-        </div>
-        <div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
-             Lorem ipsum dolor sit amet, consectet
-        </div>
-    </div>
-</div>
-
-  <?php
-
-  for ($i=0; $i < count($positions_array); $i++) { 
+    <?php  
+    
+   for ($i=0; $i < count($positions_array); $i++) { 
       $current_position = $positions_array[$i];
-      // echo $current_position;
-      ?> 
-      <div class="d-lg-flex align-content-center justify-content-center text-light font-weight-bold mt-4 py-2 bg-dark "> <center>Position: <?php echo $current_position; ?> <span class="ml-4 text-secondary ">Select only one Candidate</span> </center>  </div>
-      <?php
-
-  ?>
-                    
-            <?php 
+         
+     
                      $sql = "SELECT * FROM `candidates` WHERE `position`='$current_position'";
                      $query = mysqli_query($connect_db, $sql);
                      while($results = mysqli_fetch_array($query))
                      {
                         ?>
-                       
+                        <div id="step-<?php echo $i; ?>" class="tab-pane" role="tabpanel" aria-labelledby="step-<?php echo $i; ?>">
                         <div class="bg-white container d-flex align-items-center justify-content-center">
                             <!-- <p class="text-warning">Please, choose your favourite candidate</p> -->
                             <form action="" id="ballot" class="ballot ">
@@ -221,7 +191,7 @@ while ($each_position = mysqli_fetch_array($get_positions)) {
 
                                 <!-- submit vote button --> 
                             </form>                           
-
+                         </div>
                     </div>
                         <?php
                      }
@@ -230,6 +200,10 @@ while ($each_position = mysqli_fetch_array($get_positions)) {
 
 <?php } ?>
 
+    </div>
+</div>
+
+  
 <!-- 
 <footer class="main-footer justify-content-between " style="background: #252525; margin-top: 40px; color: #fff; height: 50px; font-size: 13px">
     <div class="container">
